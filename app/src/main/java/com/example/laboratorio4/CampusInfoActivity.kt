@@ -94,7 +94,7 @@ fun SectionTitle(title: String) {
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Gray,
-            modifier = Modifier.align(Alignment.Start) // Alinear dentro de la columna
+            modifier = Modifier.align(Alignment.Start)
         )
     }
 }
@@ -125,12 +125,12 @@ fun HighlightCard(title: String, imageRes: Int, backgroundColor: Color) {
         modifier = Modifier
             .width(170.dp) // Ajuste del ancho de las tarjetas
             .height(150.dp) // Ajuste de la altura de las tarjetas
-            .clickable { /* Añadir acción de clic si es necesario */ },
+            .clickable { /* acción de clic */ },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = backgroundColor // Usar el color de fondo correctamente
+            containerColor = backgroundColor
         ),
-        elevation = CardDefaults.cardElevation(4.dp) // Aplicar algo de elevación
+        elevation = CardDefaults.cardElevation(6.dp)
     ) {
         Column(
             modifier = Modifier
@@ -142,14 +142,14 @@ fun HighlightCard(title: String, imageRes: Int, backgroundColor: Color) {
             Image(
                 painter = painterResource(id = imageRes),
                 contentDescription = title,
-                modifier = Modifier.size(64.dp) // Hacer las imágenes más grandes
+                modifier = Modifier.size(80.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = title,
-                color = Color.White, // Ajuste del color del texto para ser visible
+                color = Color.White,
                 fontWeight = FontWeight.Bold,
-                fontSize = 14.sp // Ajuste del tamaño de la fuente
+                fontSize = 16.sp
             )
         }
     }
@@ -165,12 +165,12 @@ fun ServicesSection() {
         HighlightCard(
             title = "Directorio de Servicios Estudiantiles",
             imageRes = R.drawable.servicios_estudiantiles,
-            backgroundColor = Color.Red
+            backgroundColor = Color(0xFF4CAF50)
         )
         HighlightCard(
             title = "Portal Web Bibliotecas UVG",
             imageRes = R.drawable.portal_bibliotecas,
-            backgroundColor = Color.LightGray
+            backgroundColor = Color.Gray
         )
     }
 }
