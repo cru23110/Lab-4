@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lab4NombreApellido</string>
+    <string name="textS1">Edit Profile</string>
+    <string name="textS2">Email Addresses</string>
+    <string name="textS3">Notifications</string>
+    <string name="textS4">Privacy</string>
+    <string name="textS5">Help and Feedback</string>
+    <string name="textS6">About</string>
 </resources>
