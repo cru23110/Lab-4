@@ -6,4 +6,9 @@
     <string name="textS4">Privacy</string>
     <string name="textS5">Help and Feedback</string>
     <string name="textS6">About</string>
+    <string name="textE1">Emergencia</string>
+    <string name="textE2">Si se presenta un incidente o un percance por favor marca el número de emergencia y rápidamente te apoyamos.</string>
+    <string name="textE3">Call 5978 1736</string>
+    <string name="textC1">Clínica UVG</string>
+    <string name="textC2">Call 2507 1500 ex 21312</string>
 </resources>
