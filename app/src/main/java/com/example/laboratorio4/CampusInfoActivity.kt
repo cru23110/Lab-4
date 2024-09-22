@@ -31,14 +31,14 @@ class CampusInfoActivity : ComponentActivity() {
 
         setContent {
             Laboratorio4Theme {
-                CampusInfoScreen()
+                CampusInfoScreen(onNavigateBack = { finish() }) // Si se usa con actividades
             }
         }
     }
 }
 
 @Composable
-fun CampusInfoScreen() {
+fun CampusInfoScreen(onNavigateBack: () -> Unit) {
     // Habilitar desplazamiento para la pantalla completa
     LazyColumn(
         modifier = Modifier
@@ -79,6 +79,11 @@ fun CampusInfoScreen() {
             // Sección "Servicios y Recursos"
             SectionTitle(title = "Servicios y Recursos")
             ServicesSection()
+        }
+        item {
+            Button(onClick = { onNavigateBack() }) {
+                Text("Volver")
+            }
         }
     }
 }
@@ -179,6 +184,6 @@ fun ServicesSection() {
 @Composable
 fun PreviewCampusInfoScreen() {
     Laboratorio4Theme {
-        CampusInfoScreen()
+        CampusInfoScreen(onNavigateBack = {})
     }
 }

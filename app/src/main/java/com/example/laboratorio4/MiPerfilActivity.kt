@@ -31,14 +31,14 @@ class MiPerfilActivity : ComponentActivity() {
 
         setContent {
             Laboratorio4Theme {
-                MyProfileScreen()
+                MyProfileScreen(onNavigateBack = { finish() })
             }
         }
     }
 }
 
 @Composable
-fun MyProfileScreen() {
+fun MyProfileScreen(onNavigateBack: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -93,6 +93,13 @@ fun MyProfileScreen() {
         OptionItem(iconRes = R.drawable.ic_grades, title = "My Grades")
         OptionItem(iconRes = R.drawable.ic_groups, title = "My Groups")
         OptionItem(iconRes = R.drawable.ic_events, title = "My Upcoming Events")
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        // Botón para navegar de vuelta
+        Button(onClick = { onNavigateBack() }) {
+            Text("Volver")
+        }
     }
 }
 
@@ -135,6 +142,6 @@ fun OptionItem(iconRes: Int, title: String, subtitle: String? = null) {
 @Composable
 fun PreviewMyProfileScreen() {
     Laboratorio4Theme {
-        MyProfileScreen()
+        MyProfileScreen(onNavigateBack = {})
     }
 }
