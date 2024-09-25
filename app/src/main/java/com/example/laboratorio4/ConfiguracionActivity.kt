@@ -19,6 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.clickable
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.laboratorio4.ui.theme.Laboratorio4Theme
 
 class ConfiguracionActivity : ComponentActivity() {
@@ -27,8 +30,12 @@ class ConfiguracionActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             Laboratorio4Theme {
+                val navController = rememberNavController()
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SettingsScreen(modifier = Modifier.padding(innerPadding))
+                    SettingsScreen(modifier = Modifier.padding(innerPadding),
+                        onNavigateBack = {finish()},
+                        navController = navController
+                        )
                 }
             }
         }
@@ -36,7 +43,7 @@ class ConfiguracionActivity : ComponentActivity() {
 }
 
 @Composable
-fun SettingsScreen(modifier: Modifier = Modifier) {
+fun SettingsScreen(modifier: Modifier = Modifier,navController: NavHostController, onNavigateBack: () -> Unit) {
     Box(modifier = modifier
         .fillMaxSize()
         .padding(16.dp)) {
@@ -47,50 +54,56 @@ fun SettingsScreen(modifier: Modifier = Modifier) {
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 fontWeight = FontWeight.Bold
             )
-            SettingsList()
+            SettingsList(onNavigateBack = onNavigateBack,navController = navController)
         }
     }
 }
 
 @Composable
-fun SettingsList() {
+fun SettingsList(onNavigateBack: () -> Unit,navController: NavHostController) {
     Column(modifier = Modifier.fillMaxSize()) {
         SettingsCard(
             imageResource = R.drawable.profile,
-            title = stringResource(id = R.string.textS1)
+            title = stringResource(id = R.string.textS1),
+            onClick = {}
         )
         SettingsCard(
             imageResource = R.drawable.email,
-            title = stringResource(id = R.string.textS2)
+            title = stringResource(id = R.string.textS2),
+            onClick = {}
         )
         SettingsCard(
             imageResource = R.drawable.noti,
-            title = stringResource(id = R.string.textS3)
+            title = stringResource(id = R.string.textS3),
+            onClick = {}
         )
         SettingsCard(
             imageResource = R.drawable.privacy,
-            title = stringResource(id = R.string.textS4)
+            title = stringResource(id = R.string.textS4),
+            onClick = {}
         )
 
         SettingsCard(
             imageResource = R.drawable.question,
-            title = stringResource(id = R.string.textS5)
+            title = stringResource(id = R.string.textS5),
+            onClick = {}
         )
         SettingsCard(
             imageResource = R.drawable.info,
-            title = stringResource(id = R.string.textS6)
+            title = stringResource(id = R.string.textS6),
+            onClick = {}
         )
-        Spacer(modifier = Modifier.weight(1f))
-        LogoutButton()
+        LogoutButton(onNavigateBack)
     }
 }
 
 @Composable
-fun SettingsCard(imageResource: Int, title: String) {
+fun SettingsCard(imageResource: Int, title: String,onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp),
+            .padding(vertical = 8.dp)
+            .clickable(onClick = onClick),
         shape = RoundedCornerShape(10.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
         colors = CardDefaults.cardColors(containerColor = Color.White)
@@ -114,15 +127,15 @@ fun SettingsCard(imageResource: Int, title: String) {
 }
 
 @Composable
-fun LogoutButton() {
+fun LogoutButton(onNavigateBack: () -> Unit) {
     TextButton(
-        onClick = { },
+        onClick = {onNavigateBack()},
         modifier = Modifier
             .fillMaxWidth()
             .padding(16.dp)
     ) {
         Text(
-            text = "Logout",
+            text = "Volver",
             color = Color.Red,
             fontWeight = FontWeight.Bold,
             fontSize = 18.sp
@@ -134,6 +147,7 @@ fun LogoutButton() {
 @Composable
 fun PreviewSettingsScreen() {
     Laboratorio4Theme {
-        SettingsScreen()
+        val navController = rememberNavController()
+        SettingsScreen(onNavigateBack = {}, navController = navController)
     }
 }

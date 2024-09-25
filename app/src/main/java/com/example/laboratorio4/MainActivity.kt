@@ -37,5 +37,16 @@ fun NavigationComponent(navController: NavHostController) {
                 onNavigateBack = { navController.popBackStack() }
             )
         }
+        composable("contactos_eme") {
+            EmergencyContactsScreen(
+                onNavigateBack = { navController.popBackStack() }
+            )
+        }
+        composable("confi") {
+            SettingsScreen(
+                onNavigateBack = { navController.popBackStack() },
+                navController = navController
+            )
+        }
     }
 }
