@@ -28,7 +28,10 @@ class ContactosEmergenciaActivity : ComponentActivity() {
         setContent {
             Laboratorio4Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    EmergencyContactsScreen(modifier = Modifier.padding(innerPadding))
+                    EmergencyContactsScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        onNavigateBack = { finish() } 
+                    )
                 }
             }
         }
@@ -36,11 +39,11 @@ class ContactosEmergenciaActivity : ComponentActivity() {
 }
 
 @Composable
-fun EmergencyContactsScreen(modifier: Modifier = Modifier) {
+fun EmergencyContactsScreen(modifier: Modifier = Modifier, onNavigateBack: () -> Unit) {
     Box(modifier = modifier
         .fillMaxSize()
         .padding(16.dp)) {
-        Column(modifier = Modifier.align(Alignment.TopCenter)) {
+        Column(modifier = Modifier.fillMaxSize()) {
             Text(
                 text = "Emergency Contacts",
                 fontSize = 30.sp,
@@ -48,13 +51,15 @@ fun EmergencyContactsScreen(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold
             )
             EmergencyContactsList()
+            Spacer(modifier = Modifier.weight(1f)) 
+            BackButton(onClick = onNavigateBack) 
         }
     }
 }
 
 @Composable
 fun EmergencyContactsList() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(modifier = Modifier.fillMaxWidth()) {
         // Card de Emergencias
         EmergencyCard(
             imageResource = R.drawable.emergency,
@@ -93,7 +98,7 @@ fun EmergencyCard(imageResource: Int, title: String, description: String, button
                 .fillMaxWidth()
                 .padding(16.dp)
         ) {
-            // Imagen y título
+
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Image(
                     painter = painterResource(id = imageResource),
@@ -105,10 +110,10 @@ fun EmergencyCard(imageResource: Int, title: String, description: String, button
                 Text(text = title, fontWeight = FontWeight.Bold, fontSize = 20.sp)
             }
             Spacer(modifier = Modifier.height(8.dp))
-            // Descripción
+
             Text(text = description, fontSize = 14.sp)
             Spacer(modifier = Modifier.height(16.dp))
-            // Botón de llamada
+
             CallButton(buttonText = buttonText)
         }
     }
@@ -126,10 +131,23 @@ fun CallButton(buttonText: String) {
     }
 }
 
+
+@Composable
+fun BackButton(onClick: () -> Unit) {
+    Button(
+        onClick = onClick,
+        modifier = Modifier.fillMaxWidth(),
+        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4CAF50))
+    ) {
+        Spacer(modifier = Modifier.width(8.dp))
+        Text(text = "Volver", color = Color.White, fontWeight = FontWeight.Bold)
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewEmergencyContactsScreen() {
     Laboratorio4Theme {
-        EmergencyContactsScreen()
+        EmergencyContactsScreen(onNavigateBack = {})
     }
 }
